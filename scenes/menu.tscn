@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://crnnym42rcq45"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_sakvb"]
+[ext_resource type="FontFile" uid="uid://blgr3hgtr01hw" path="res://assets/fonts/PixelOperator8.ttf" id="2_sexwf"]
+[ext_resource type="FontFile" uid="uid://kupe4205a8kx" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_j0pab"]
+
+[sub_resource type="Theme" id="Theme_m6fey"]
+default_font = ExtResource("2_sexwf")
+default_font_size = 30
+
+[sub_resource type="Theme" id="Theme_swb4d"]
+default_font = ExtResource("2_sexwf")
+default_font_size = 30
+
+[sub_resource type="Theme" id="Theme_keemq"]
+default_font = ExtResource("2_sexwf")
+default_font_size = 30
+
+[node name="Menu" type="Control"]
+process_mode = 3
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sakvb")
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+z_index = 5
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.5
+offset_top = -62.5
+offset_right = 105.5
+offset_bottom = 62.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_m6fey")
+theme_override_colors/font_hover_color = Color(0.137122, 0.645266, 1.92523e-07, 1)
+theme_override_fonts/font = ExtResource("3_j0pab")
+text = "PLAY"
+
+[node name="Restart" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_swb4d")
+theme_override_colors/font_hover_color = Color(1, 0.8, 0, 1)
+theme_override_fonts/font = ExtResource("3_j0pab")
+disabled = true
+text = "RESTART"
+
+[node name="Scoreboard" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_m6fey")
+theme_override_colors/font_hover_color = Color(0.137122, 0.645266, 1.92523e-07, 1)
+theme_override_fonts/font = ExtResource("3_j0pab")
+text = "SCOREBOARD"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_keemq")
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_j0pab")
+text = "EXIT"
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Scoreboard" to="." method="_on_scoreboard_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_button_pressed"]

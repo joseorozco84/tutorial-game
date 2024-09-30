@@ -1,0 +1,13 @@
+agregar 3 segundos de countdown antes de empezar a jugar----------
+agregar records-------------
+agregar gameover-----------
+agregar animacion de daño-----------
+agregar corazones-----------
+agregar opciones
+activar glide despues del primer salto------
+mostrar controles
+fondo con paralaje
+arreglar escalera
+arreglar bug muerte en agua
+agregar sonido al ataque del personaje-------
+arreglar scoreboard en partida

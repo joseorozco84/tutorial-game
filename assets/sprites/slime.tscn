@@ -1,0 +1,155 @@
+[gd_scene load_steps=19 format=3 uid="uid://duyosxpmhbr0r"]
+
+[ext_resource type="Script" path="res://assets/sprites/slime.gd" id="1_jgtn5"]
+[ext_resource type="Texture2D" uid="uid://c10h30stea8s" path="res://assets/sprites/slime_purple.png" id="2_7mvs5"]
+[ext_resource type="PackedScene" uid="uid://col1nbb7ddaf8" path="res://scenes/killzone.tscn" id="2_8hu1m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l6w73"]
+size = Vector2(10, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_borvq"]
+atlas = ExtResource("2_7mvs5")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb8ph"]
+atlas = ExtResource("2_7mvs5")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfb08"]
+atlas = ExtResource("2_7mvs5")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q1f1y"]
+atlas = ExtResource("2_7mvs5")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrc3n"]
+atlas = ExtResource("2_7mvs5")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elmu7"]
+atlas = ExtResource("2_7mvs5")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4xsq"]
+atlas = ExtResource("2_7mvs5")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aos3q"]
+atlas = ExtResource("2_7mvs5")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmcei"]
+atlas = ExtResource("2_7mvs5")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvoot"]
+atlas = ExtResource("2_7mvs5")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uiidu"]
+atlas = ExtResource("2_7mvs5")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8q5jf"]
+atlas = ExtResource("2_7mvs5")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fk4mq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_borvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nb8ph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfb08")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q1f1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrc3n")
+}],
+"loop": false,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elmu7")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4xsq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aos3q")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmcei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bvoot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uiidu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8q5jf")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ln4mk"]
+size = Vector2(14, 15)
+
+[node name="Slime" type="CharacterBody2D" groups=["Enemy"]]
+z_index = 2
+script = ExtResource("1_jgtn5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_l6w73")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_fk4mq")
+animation = &"idle"
+autoplay = "walk"
+frame_progress = 0.684709
+
+[node name="Killzone" parent="." instance=ExtResource("2_8hu1m")]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_ln4mk")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(0, -11)
+target_position = Vector2(8, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(0, -11)
+target_position = Vector2(-8, 0)
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
