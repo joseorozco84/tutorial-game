@@ -8,6 +8,10 @@ activar glide despues del primer salto------
 mostrar controles
 fondo con paralaje
 arreglar escalera
-arreglar bug muerte en agua
+arreglar bug muerte en agua----------
 agregar sonido al ataque del personaje-------
-arreglar scoreboard en partida
+arreglar scoreboard en partida en curso
+arreglar scoreboard cuando jugador tiene tiempo null--------
+agregar pantalla de bienvenida
+agregar global.player_name
+agregar / total de monedas al label

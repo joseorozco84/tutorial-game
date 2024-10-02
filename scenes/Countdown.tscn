@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpa0yexh2w5uy"]
+[gd_scene load_steps=3 format=3 uid="uid://cpa0yexh2w5uy"]
 
 [ext_resource type="FontFile" uid="uid://kupe4205a8kx" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_5hqeu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_aicde"]
+font = ExtResource("1_5hqeu")
+font_size = 40
+font_color = Color(1, 0, 0, 0.619608)
+outline_size = 4
+outline_color = Color(0.145098, 0.145098, 0.145098, 1)
 
 [node name="Control" type="Control"]
 process_mode = 3
@@ -31,8 +38,10 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0, 0, 0.513726)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_5hqeu")
 theme_override_font_sizes/font_size = 50
 text = "3"
+label_settings = SubResource("LabelSettings_aicde")
 horizontal_alignment = 1
 vertical_alignment = 1

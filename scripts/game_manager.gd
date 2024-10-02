@@ -1,8 +1,7 @@
 extends Node
 
 # Variables globales
-var total_coins: int = 100  # Total de monedas en la escena
-#var total_coins = get_tree().get_nodes_in_group("Coins").size()
+var total_coins: int = 0  # Inicializamos la variable con 0
 var collected_coins: int = 0  # Monedas recogidas por el jugador
 var score: int = 0  # Puntaje total del jugador
 var timer: float = 0.0  # Variable para llevar el conteo del tiempo en segundos
@@ -13,6 +12,9 @@ var player_name: String = ""  # Variable para almacenar el nombre del jugador
 @onready var timer_label: Label = %TimerLabel
 
 func _ready():
+	# Inicializamos el conteo total de monedas después de que la escena esté lista
+	#total_coins = get_tree().get_nodes_in_group("Coins").size()
+	total_coins = 10
 	_start_timer()
 
 func _process(delta: float) -> void:
@@ -103,9 +105,14 @@ func is_new_record(new_time: int) -> bool:
 		global.new_record_time = true
 		return true
 
+	# Asegúrate de que el primer puntaje sea válido
 	var best_time = scores[0]["time"]
+	if best_time == null:
+		print("Error: el mejor tiempo es Nil, no se puede comparar.")
+		return false  # Salimos si no hay un mejor tiempo válido
+
 	for score in scores:
-		if score["time"] < best_time:
+		if score["time"] != null and score["time"] < best_time:
 			best_time = score["time"]
 
 	if new_time < best_time:

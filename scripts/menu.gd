@@ -2,10 +2,12 @@
 
 extends Control
 @onready var menu: Control = $"."
-@onready var play: Button = $VBoxContainer/Play
-@onready var restart: Button = $VBoxContainer/Restart
-@onready var scoreboard: Button = $VBoxContainer/Scoreboard
+@onready var play_button: Button = $VBoxContainer/PlayButton
+@onready var restart_button: Button = $VBoxContainer/RestartButton
+@onready var scoreboard_button: Button = $VBoxContainer/ScoreboardButton
 @onready var custom_cursor: Texture = preload("res://assets/sprites/cursor.png")
+@onready var hover_sound: AudioStreamPlayer = $HoverSound
+@onready var panel: Panel = $Panel
 
 
 func _ready():
@@ -21,12 +23,18 @@ func _input(_event: InputEvent) -> void:
 	#print(_event.as_text())
 	if Input.is_action_just_pressed("ui_cancel"):
 		_toggle_cursor()
-		play.text = "Continue"  # Actualiza el texto del botón "Play" al mostrar el menú
-		restart.disabled = false
+		panel.visible = true
+		play_button.text = "CONTINUE"  # Actualiza el texto del botón "Play" al mostrar el menú
+		restart_button.disabled = false
 		await get_tree().create_timer(0.2).timeout
 		if get_tree().paused:
 			_toggle_menu()
 	
+# Función para reproducir sonido al hacer mouseover
+func _on_button_mouse_entered() -> void:
+	if hover_sound:
+		hover_sound.stop()
+		hover_sound.play()
 
 # Función para iniciar la partida
 func _on_play_button_pressed() -> void:
@@ -37,7 +45,7 @@ func _on_play_button_pressed() -> void:
 	else:
 		print("New game")
 		#get_tree().paused = true
-		await get_tree().create_timer(0.7).timeout
+		#await get_tree().create_timer(0.7).timeout
 		#get_tree().change_scene_to_file("res://scenes/game.tscn")  # Cambia a la escena del juego
 		get_tree().change_scene_to_file("res://scenes/player_name.tscn")
 		
@@ -59,6 +67,7 @@ func _on_scoreboard_button_pressed():
 # Función para salir del juego
 func _on_exit_button_pressed() -> void:
 	print("Exit game")
+	await get_tree().create_timer(0.7).timeout
 	get_tree().quit()  # Sale del juego
 
 # Función para mostrar/ocultar menu

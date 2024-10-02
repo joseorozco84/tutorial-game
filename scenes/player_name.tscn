@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://888oh3g1wm66"]
+[gd_scene load_steps=7 format=3 uid="uid://888oh3g1wm66"]
 
 [ext_resource type="Script" path="res://scripts/player_name.gd" id="1_uljjp"]
 [ext_resource type="FontFile" uid="uid://kupe4205a8kx" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_qnovs"]
+[ext_resource type="FontFile" uid="uid://blgr3hgtr01hw" path="res://assets/fonts/PixelOperator8.ttf" id="3_n6f50"]
+[ext_resource type="AudioStream" uid="uid://7n0r3luti6en" path="res://assets/sounds/hover_sound.wav" id="4_qjwt4"]
+
+[sub_resource type="Theme" id="Theme_labu1"]
+default_font = ExtResource("3_n6f50")
+default_font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_k0wer"]
+font = ExtResource("2_qnovs")
+font_size = 40
 
 [node name="PlayerName" type="CanvasLayer"]
 
@@ -21,14 +31,15 @@ script = ExtResource("1_uljjp")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PlayerName"]
 layout_mode = 1
-anchors_preset = 14
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -176.0
-offset_top = -24.0
-offset_right = 176.0
-offset_bottom = 24.0
+offset_left = -200.0
+offset_top = -86.0
+offset_right = 200.0
+offset_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -36,13 +47,103 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2_qnovs")
-placeholder_text = "Enter your name..."
+placeholder_text = "New name..."
 max_length = 30
+select_all_on_focus = true
 
 [node name="SubmitButton" type="Button" parent="PlayerName/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/font_color = Color(0.360784, 0.615686, 0, 1)
 theme_override_fonts/font = ExtResource("2_qnovs")
-text = "SAVE"
+text = "ADD"
 
+[node name="DeleteButton" type="Button" parent="PlayerName/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_qnovs")
+text = "DEL"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlayerName"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -33.0
+offset_right = 200.0
+offset_bottom = 267.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameList" type="ItemList" parent="PlayerName/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_constants/v_separation = 50
+theme_override_fonts/font = ExtResource("2_qnovs")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PlayerName"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 271.0
+offset_right = 200.0
+offset_bottom = 435.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerName/HBoxContainer3"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="PlayerName/HBoxContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_hover_color = Color(0.36004, 0.616558, 0, 1)
+theme_override_fonts/font = ExtResource("2_qnovs")
+theme_override_font_sizes/font_size = 30
+text = "PLAY"
+
+[node name="BackButton" type="Button" parent="PlayerName/HBoxContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+theme = SubResource("Theme_labu1")
+theme_override_colors/font_hover_color = Color(0.137122, 0.645266, 1.92523e-07, 1)
+theme_override_fonts/font = ExtResource("2_qnovs")
+theme_override_font_sizes/font_size = 30
+text = "BACK"
+
+[node name="ScoreboardLabel" type="Label" parent="PlayerName"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = -152.0
+offset_right = 200.0
+offset_bottom = -112.0
+grow_horizontal = 2
+text = "PLAYER"
+label_settings = SubResource("LabelSettings_k0wer")
+horizontal_alignment = 1
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="PlayerName"]
+stream = ExtResource("4_qjwt4")
+volume_db = 10.0
+
+[connection signal="mouse_entered" from="PlayerName" to="PlayerName" method="_on_mouse_button_entered"]
+[connection signal="focus_entered" from="PlayerName/HBoxContainer/NameInput" to="PlayerName" method="_on_name_input_focus_entered"]
 [connection signal="pressed" from="PlayerName/HBoxContainer/SubmitButton" to="PlayerName" method="_on_submit_button_pressed"]
+[connection signal="pressed" from="PlayerName/HBoxContainer/DeleteButton" to="PlayerName" method="_on_delete_button_pressed"]
+[connection signal="item_selected" from="PlayerName/HBoxContainer2/NameList" to="PlayerName" method="_on_name_list_item_selected"]
+[connection signal="pressed" from="PlayerName/HBoxContainer3/VBoxContainer/PlayButton" to="PlayerName" method="_on_play_button_pressed"]
+[connection signal="pressed" from="PlayerName/HBoxContainer3/VBoxContainer/BackButton" to="PlayerName" method="_on_back_button_pressed"]

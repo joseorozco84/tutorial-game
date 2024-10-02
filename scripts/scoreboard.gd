@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var back_button: Button = $Control/Back
 @onready var score_list: VBoxContainer = $VBoxContainer2/ScoreList
+@onready var hover_sound: AudioStreamPlayer = $Control/HoverSound
 
 func _ready():
 	global.current_scene = get_tree().current_scene.get_path()
@@ -34,18 +35,24 @@ func _load_scores():
 			for score in scores:
 				var name = score["name"]  # Acceder a 'name' como un diccionario
 				var time = score["time"]  # Acceder a 'time' como un diccionario
-				var score_label = HBoxContainer.new()  # Crear un nuevo HBoxContainer para cada puntaje
 				
+				# Verificar si 'time' es un número válido (entero o flotante que pueda ser entero)
+				if typeof(time) != TYPE_INT and typeof(time) != TYPE_FLOAT:
+					print("Valor de tiempo no válido para el jugador: ", name)
+					continue  # Saltar este puntaje si 'time' no es un número
+				
+				# Crear un nuevo HBoxContainer para cada puntaje
+				var score_label = HBoxContainer.new()  
+
 				# Crear una etiqueta para el nombre con ajuste de tamaño
 				var name_label = Label.new()
 				name_label.text = name
 				name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL  # Hacer que el nombre ocupe el espacio necesario
 				
 				# Formatear el tiempo como mm:ss
-				var minutes = int(time) / 60  # Asegúrate de que time es un entero al dividir
-				var seconds = int(time) % 60  # Asegúrate de que time es un entero al usar el operador %
+				var minutes = int(time) / 60  # Convertir a minutos
+				var seconds = int(time) % 60  # Convertir a segundos
 				var formatted_time = str(minutes).pad_zeros(2) + ":" + str(seconds).pad_zeros(2)  # Formatear como 00:00
-
 
 				# Crear una etiqueta para el tiempo con ajuste de tamaño
 				var time_label = Label.new()
@@ -66,6 +73,7 @@ func _load_scores():
 	else:
 		print("Error al abrir el archivo.")
 
+
 # Función para crear el archivo de puntajes sin contenido inicial
 func _create_score_file(file_path: String) -> void:
 	var file = FileAccess.open(file_path, FileAccess.WRITE)  # Abrir el archivo para escritura
@@ -79,3 +87,8 @@ func _create_score_file(file_path: String) -> void:
 # Función llamada al presionar el botón de menú
 func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")  # Volver al menú
+
+func _on_button_mouse_entered() -> void:
+	if hover_sound:
+		hover_sound.stop()
+		hover_sound.play()

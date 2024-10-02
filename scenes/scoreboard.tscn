@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://baa4un8adr0dj"]
+[gd_scene load_steps=10 format=3 uid="uid://baa4un8adr0dj"]
 
 [ext_resource type="FontFile" uid="uid://kupe4205a8kx" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_0ltut"]
 [ext_resource type="Script" path="res://scripts/scoreboard.gd" id="1_5utei"]
 [ext_resource type="FontFile" uid="uid://blgr3hgtr01hw" path="res://assets/fonts/PixelOperator8.ttf" id="3_7hd4o"]
+[ext_resource type="AudioStream" uid="uid://7n0r3luti6en" path="res://assets/sounds/hover_sound.wav" id="4_t1x5t"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_q13ir"]
 font = ExtResource("1_0ltut")
@@ -99,6 +100,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Back" type="Button" parent="Control"]
+custom_minimum_size = Vector2(400, 80)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -114,6 +116,12 @@ grow_vertical = 2
 theme = SubResource("Theme_60ixv")
 theme_override_colors/font_hover_color = Color(0.137122, 0.645266, 1.92523e-07, 1)
 theme_override_fonts/font = ExtResource("1_0ltut")
+theme_override_font_sizes/font_size = 30
 text = "BACK"
 
+[node name="HoverSound" type="AudioStreamPlayer" parent="Control"]
+stream = ExtResource("4_t1x5t")
+volume_db = 10.0
+
+[connection signal="mouse_entered" from="Control" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="Control/Back" to="." method="_on_back_button_pressed"]

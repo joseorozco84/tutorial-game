@@ -19,9 +19,13 @@
 [ext_resource type="PackedScene" uid="uid://crnnym42rcq45" path="res://scenes/menu.tscn" id="12_jpoid"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lv4k5"]
+outline_size = 8
+outline_color = Color(0.145098, 0.145098, 0.145098, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_1oxnd"]
 font = ExtResource("2_qr5vi")
+outline_size = 8
+outline_color = Color(0.144063, 0.144063, 0.144062, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_soiuw"]
 texture = ExtResource("2_xk666")
@@ -340,7 +344,7 @@ region_rect = Rect2(113, 128, 14, 16)
 [node name="TimerLabel" type="Label" parent="UI/GameManager/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "0:00"
+text = "00:00"
 label_settings = SubResource("LabelSettings_1oxnd")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -400,13 +404,12 @@ limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 
-[node name="Killzone" parent="." instance=ExtResource("5_heea3")]
+[node name="Killzone" parent="." groups=["Killzone"] instance=ExtResource("5_heea3")]
 position = Vector2(912, 272)
-metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
-position = Vector2(-706, 0)
+position = Vector2(-706, 8)
 shape = SubResource("WorldBoundaryShape2D_kc1w7")
 
 [node name="Coins" type="Node" parent="."]

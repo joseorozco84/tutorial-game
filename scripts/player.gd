@@ -47,6 +47,8 @@ func take_damage(amount: int) -> void:
 		print("You died!")
 		death_sound.play()
 		animated_sprite.play("death")
+		# Cargar la escena de gameover
+		get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 
 # Lógica para recuperar vida
 func heal(amount: int) -> void:

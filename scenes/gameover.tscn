@@ -1,17 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://op0q2ud3qakr"]
+[gd_scene load_steps=10 format=3 uid="uid://op0q2ud3qakr"]
 
 [ext_resource type="Script" path="res://scripts/gameover.gd" id="1_1o6ip"]
 [ext_resource type="FontFile" uid="uid://kupe4205a8kx" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_x0kls"]
 [ext_resource type="FontFile" uid="uid://blgr3hgtr01hw" path="res://assets/fonts/PixelOperator8.ttf" id="2_snxfd"]
 [ext_resource type="AudioStream" uid="uid://4uf3ul38g4rv" path="res://assets/music/gameover.mp3" id="4_rn5rw"]
+[ext_resource type="AudioStream" uid="uid://7n0r3luti6en" path="res://assets/sounds/hover_sound.wav" id="5_vkntf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_11mbh"]
 font = ExtResource("1_x0kls")
 font_size = 40
-
-[sub_resource type="Theme" id="Theme_nycci"]
-default_font = ExtResource("2_snxfd")
-default_font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_ebo5g"]
 font = ExtResource("1_x0kls")
@@ -21,6 +18,10 @@ font_size = 24
 font = ExtResource("1_x0kls")
 font_size = 24
 font_color = Color(0.957714, 0.503462, 0, 1)
+
+[sub_resource type="Theme" id="Theme_nycci"]
+default_font = ExtResource("2_snxfd")
+default_font_size = 30
 
 [node name="Gameover" type="CanvasLayer"]
 script = ExtResource("1_1o6ip")
@@ -32,9 +33,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -172.5
-offset_top = -176.0
+offset_top = -240.0
 offset_right = 172.5
-offset_bottom = -136.0
+offset_bottom = -200.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "GAME OVER"
@@ -48,83 +49,87 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = -20.0
+offset_top = -84.0
 offset_right = 20.0
-offset_bottom = 20.0
+offset_bottom = -44.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Menu" type="Button" parent="Control"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -66.0
-offset_top = 214.5
-offset_right = 66.0
-offset_bottom = 253.5
+offset_left = -200.0
+offset_top = -80.0
+offset_right = 200.0
+offset_bottom = 28.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TimeLabel" type="Label" parent="Control/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_ebo5g")
+horizontal_alignment = 1
+
+[node name="NewRecordLabel" type="Label" parent="Control/VBoxContainer2"]
+layout_mode = 2
+text = "NEW RECORD!"
+label_settings = SubResource("LabelSettings_t4lt7")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 128.0
+offset_right = 200.0
+offset_bottom = 292.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TryAgainButton" type="Button" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+theme = SubResource("Theme_nycci")
+theme_override_colors/font_hover_color = Color(0.137122, 0.645266, 1.92523e-07, 1)
+theme_override_fonts/font = ExtResource("1_x0kls")
+text = "TRY AGAIN!"
+
+[node name="ScoreButton" type="Button" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+theme = SubResource("Theme_nycci")
+theme_override_colors/font_hover_color = Color(0.137122, 0.645266, 1.92523e-07, 1)
+theme_override_fonts/font = ExtResource("1_x0kls")
+text = "SCOREBOARD"
+
+[node name="MenuButton" type="Button" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
 theme = SubResource("Theme_nycci")
 theme_override_colors/font_hover_color = Color(0.137122, 0.645266, 1.92523e-07, 1)
 theme_override_fonts/font = ExtResource("1_x0kls")
 text = "MENU"
 
-[node name="Scoreboard" type="Button" parent="Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -66.0
-offset_top = 165.5
-offset_right = 66.0
-offset_bottom = 204.5
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_nycci")
-theme_override_colors/font_hover_color = Color(0.137122, 0.645266, 1.92523e-07, 1)
-theme_override_fonts/font = ExtResource("1_x0kls")
-text = "SCORE"
-
-[node name="TimeLabel" type="Label" parent="Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -38.0
-offset_top = -11.5
-offset_right = 38.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "00:00"
-label_settings = SubResource("LabelSettings_ebo5g")
-
-[node name="NewRecordLabel" type="Label" parent="Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = 36.5
-offset_right = 20.0
-offset_bottom = 59.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "NEW RECORD!"
-label_settings = SubResource("LabelSettings_t4lt7")
+[node name="HoverSound" type="AudioStreamPlayer" parent="Control"]
+stream = ExtResource("5_vkntf")
+volume_db = 10.0
 
 [node name="GameoverAudio" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("4_rn5rw")
 
-[connection signal="pressed" from="Control/Menu" to="." method="_on_menu_pressed"]
-[connection signal="pressed" from="Control/Scoreboard" to="." method="_on_scoreboard_pressed"]
+[connection signal="mouse_entered" from="Control" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/TryAgainButton" to="." method="_on_try_again_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/ScoreButton" to="." method="_on_scoreboard_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
