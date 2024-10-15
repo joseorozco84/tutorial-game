@@ -3,7 +3,7 @@ agregar records-------------
 agregar gameover-----------
 agregar animacion de daño-----------
 agregar corazones-----------
-agregar opciones
+agregar opciones---------
 activar glide despues del primer salto------
 mostrar controles
 fondo con paralaje
@@ -11,7 +11,13 @@ arreglar escalera
 arreglar bug muerte en agua----------
 agregar sonido al ataque del personaje-------
 arreglar scoreboard en partida en curso
+arreglar tecla escape en countdown
 arreglar scoreboard cuando jugador tiene tiempo null--------
 agregar pantalla de bienvenida
-agregar global.player_name
-agregar / total de monedas al label
+agregar perfil global.player_name---------
+agregar objetivo global-----------
+arreglar opciones----------
+agregar matar con dash--------
+agregar indicador visual al recibir daño
+agregar enemigo tira corazon---------
+arreglar para saltar abajo de los puentes

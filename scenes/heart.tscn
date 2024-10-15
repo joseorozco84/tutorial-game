@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://cahsnr38pu0bl"]
+
+[ext_resource type="Script" path="res://scripts/heart.gd" id="1_j0we4"]
+[ext_resource type="Texture2D" uid="uid://clwsc7r3u0goe" path="res://assets/sprites/heartfill.png" id="2_laa27"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3152i"]
+radius = 8.0
+
+[sub_resource type="Animation" id="Animation_mw8f4"]
+resource_name = "heart_idle"
+length = 0.25
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_m2m6c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mr1h5"]
+_data = {
+"RESET": SubResource("Animation_m2m6c"),
+"heart_idle": SubResource("Animation_mw8f4")
+}
+
+[node name="Heart" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_j0we4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_laa27")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.42857)
+shape = SubResource("CircleShape2D_3152i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mr1h5")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

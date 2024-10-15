@@ -8,8 +8,8 @@ extends CanvasLayer
 func _ready() -> void:
 	# Agregar un delay
 	new_record_label.visible = false
-	await get_tree().create_timer(0.7).timeout
-	if bgm and bgm is AudioStreamPlayer2D:
+	#await get_tree().create_timer(0.7).timeout
+	if bgm and bgm is AudioStreamPlayer:
 		bgm.stop()
 	global.current_scene = get_tree().current_scene.to_string()
 	#print(global.current_scene)
@@ -43,12 +43,12 @@ func format_time(total_seconds: int) -> String:
 # Función para manejar el botón de volver al menú
 func _on_menu_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
-	if bgm and bgm is AudioStreamPlayer2D:
+	if bgm and bgm is AudioStreamPlayer:
 		bgm.play()
 
 func _on_scoreboard_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/scoreboard.tscn")
-	if bgm and bgm is AudioStreamPlayer2D:
+	if bgm and bgm is AudioStreamPlayer:
 		bgm.play()
 
 

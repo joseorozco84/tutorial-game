@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d3i7t48mll2xk"]
+[gd_scene load_steps=28 format=3 uid="uid://d3i7t48mll2xk"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_15rli"]
 [ext_resource type="PackedScene" uid="uid://bbaevw1a34to4" path="res://scenes/hud.tscn" id="1_fb1dm"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://h7gfi7ue33as" path="res://scenes/platform.tscn" id="3_05adx"]
 [ext_resource type="Texture2D" uid="uid://b2xj451ihsmno" path="res://assets/sprites/coin.png" id="3_fqyiy"]
 [ext_resource type="PackedScene" uid="uid://gwygbt3fcvlx" path="res://scenes/coin.tscn" id="3_h2tlc"]
-[ext_resource type="Script" path="res://scripts/countdown.gd" id="3_xfahw"]
 [ext_resource type="PackedScene" uid="uid://col1nbb7ddaf8" path="res://scenes/killzone.tscn" id="5_heea3"]
 [ext_resource type="PackedScene" uid="uid://duyosxpmhbr0r" path="res://assets/sprites/slime.tscn" id="6_2ydvx"]
 [ext_resource type="Texture2D" uid="uid://dxglqdcyseqxo" path="res://assets/sprites/icon_sheet_16x16.png" id="6_21j3h"]
@@ -290,7 +289,6 @@ anchor_bottom = 0.0
 offset_top = 124.0
 offset_bottom = 164.0
 grow_vertical = 1
-script = ExtResource("3_xfahw")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -398,7 +396,7 @@ metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -40)
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
 limit_bottom = 2048
 limit_smoothed = true
 position_smoothing_enabled = true

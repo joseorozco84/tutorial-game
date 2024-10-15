@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://gwygbt3fcvlx"]
+[gd_scene load_steps=22 format=3 uid="uid://gwygbt3fcvlx"]
 
 [ext_resource type="Texture2D" uid="uid://b2xj451ihsmno" path="res://assets/sprites/coin.png" id="1_8spw2"]
 [ext_resource type="Script" path="res://scripts/coin.gd" id="1_47lk0"]
@@ -52,6 +52,10 @@ region = Rect2(160, 0, 16, 16)
 atlas = ExtResource("1_8spw2")
 region = Rect2(176, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6e0u1"]
+atlas = ExtResource("1_8spw2")
+region = Rect2(0, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_llq1t"]
 animations = [{
 "frames": [{
@@ -94,6 +98,14 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6e0u1")
+}],
+"loop": true,
+"name": &"pickup",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pta48"]
@@ -204,9 +216,8 @@ script = ExtResource("1_47lk0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_llq1t")
+animation = &"pickup"
 autoplay = "default"
-frame = 3
-frame_progress = 0.567042
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_pta48")

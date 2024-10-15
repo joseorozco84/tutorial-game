@@ -34,15 +34,12 @@ func _ready() -> void:
 
 # Conectar señales de animaciones y del temporizador
 func _connect_signals() -> void:
-	print("Connecting signals...")
 
 	if not animated_sprite.is_connected("animation_finished", Callable(self, "_on_animation_finished")):
 		animated_sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
 
 	if not timer.is_connected("timeout", Callable(self, "_on_timer_timeout")):
 		timer.connect("timeout", Callable(self, "_on_timer_timeout"))
-
-	print("Signals connected!")
 
 
 # Función para manejar cuando una animación termina
@@ -90,10 +87,19 @@ func _apply_knockback() -> void:
 
 # Comportamiento cuando el Slime muere
 func _on_death() -> void:
-	is_dead = true  # Marcar como muerto
+	is_dead = true
 	print("Slime died!")
 	_disable_collision()
-	animated_sprite.play("death")  # Reproducir animación de muerte
+	animated_sprite.play("death")
+
+	_spawn_heart()  # Invocar la función que crea el corazón
+
+func _spawn_heart() -> void:
+	var heart_scene = preload("res://scenes/heart.tscn")  # Cambia el path por el correcto
+	var heart_instance = heart_scene.instantiate()
+	heart_instance.position = global_position  # Coloca el corazón donde murió el Slime
+	get_parent().add_child(heart_instance)
+
 
 # Desactivar las colisiones del Slime cuando muere
 func _disable_collision() -> void:

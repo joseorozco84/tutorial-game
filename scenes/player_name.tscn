@@ -139,6 +139,7 @@ horizontal_alignment = 1
 [node name="HoverSound" type="AudioStreamPlayer" parent="PlayerName"]
 stream = ExtResource("4_qjwt4")
 volume_db = 10.0
+bus = &"SFX"
 
 [connection signal="mouse_entered" from="PlayerName" to="PlayerName" method="_on_mouse_button_entered"]
 [connection signal="focus_entered" from="PlayerName/HBoxContainer/NameInput" to="PlayerName" method="_on_name_input_focus_entered"]

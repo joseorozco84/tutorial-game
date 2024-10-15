@@ -21,6 +21,7 @@ const ATTACK_COOLDOWN = 0.5  # Tiempo de enfriamiento entre ataques
 var attack_cooldown_timer: float = 0.0  # Temporizador para el enfriamiento
 
 
+
 # Lógica para detectar si el ataque golpea a un enemigo
 func attack() -> void:
 	if not is_attacking and attack_cooldown_timer <= 0:
@@ -32,7 +33,7 @@ func attack() -> void:
 		# Verificar si hay enemigos en el área de ataque
 		for enemy in attack_area.get_overlapping_bodies():
 			if enemy is Enemy:  # Asegúrate de que los enemigos usen una clase llamada 'Enemy'
-				enemy.take_damage(1)  # Asumimos que los enemigos tienen una función `take_damage`
+				enemy.take_damage(3)  # Asumimos que los enemigos tienen una función `take_damage`
 
 
 # Lógica del daño al personaje
@@ -47,13 +48,20 @@ func take_damage(amount: int) -> void:
 		print("You died!")
 		death_sound.play()
 		animated_sprite.play("death")
-		# Cargar la escena de gameover
-		get_tree().change_scene_to_file("res://scenes/gameover.tscn")
+		# Llamar a la función de cambio de escena con call_deferred
+		get_tree().call_deferred("change_scene_to_file", "res://scenes/gameover.tscn")
+
 
 # Lógica para recuperar vida
 func heal(amount: int) -> void:
 	current_health = clamp(current_health + amount, 0, MAX_HEALTH)  # Limitar current_health entre 0 y MAX_HEALTH
 	update_hearts()
+
+func _on_heart_collected(heart: Node) -> void:
+	if current_health < MAX_HEALTH:
+		current_health += 1  # Recuperar 1 punto de salud
+		print("Vida recuperada!")
+
 
 # Actualizar los corazones en pantalla
 func update_hearts() -> void:
@@ -71,14 +79,14 @@ func update_hearts() -> void:
 	#elif Input.is_action_just_pressed("heal"):
 		#heal(1)
 
-const SPEED = 130.0
-const JUMP_VELOCITY = -250.0
-const DASH_SPEED = 250.0
+const SPEED = 50.0
+const JUMP_VELOCITY = -200.0
+const DASH_SPEED = 150.0
 const DASH_DURATION = 0.3
 const DASH_COOLDOWN = 0.3
 const MAX_JUMPS = 2
 const DOUBLE_TAP_TIME = 0.4
-const GRAVITY = 800.0
+const GRAVITY = 600.0
 const SLOW_FALL_GRAVITY = 100.0
 
 
@@ -154,6 +162,13 @@ func _physics_process(delta: float) -> void:
 		dash_time -= delta
 		if dash_time <= 0:
 			velocity.x = 0
+			
+	# Llamar a la lógica de dash attack durante el dash
+	if dash_time > 0:
+		dash_attack(delta)
+	else:
+		# Movimiento normal si no está en dash
+		move_and_slide()
 	
 	# Voltear el sprite
 	if direction > 0:
@@ -188,3 +203,23 @@ func _physics_process(delta: float) -> void:
 
 	# Aplicar el movimiento
 	move_and_slide()
+
+
+# Detectar colisiones durante el dash
+func dash_attack(delta: float) -> void:
+	# Verificamos si el dash está activo y movemos al personaje con move_and_collide()
+	if dash_time > 0:
+		# Mover con colisiones (para detectar colisiones con enemigos)
+		var collision = move_and_collide(Vector2(dash_direction.x * DASH_SPEED, velocity.y) * delta)
+
+		if collision:
+			# Si la colisión es con un enemigo, le hacemos daño
+			if collision.get_collider() is Enemy:
+				var enemy = collision.get_collider() as Enemy
+				enemy.take_damage(3)  # Asumimos que el daño durante el dash es 3
+				print("Enemigo dañado por el dash!")
+			
+		# Reducir el tiempo del dash
+		dash_time -= delta
+		if dash_time <= 0:
+			velocity.x = 0  # Detener el movimiento horizontal después del dash

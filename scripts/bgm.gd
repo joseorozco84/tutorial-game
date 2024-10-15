@@ -1,4 +1,4 @@
-extends AudioStreamPlayer2D
+extends AudioStreamPlayer
 
 func _ready():
 	## Cambia el puntero del mouse al sprite personalizado

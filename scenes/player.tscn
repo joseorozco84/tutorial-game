@@ -1,12 +1,17 @@
-[gd_scene load_steps=55 format=3 uid="uid://clmo7yp4pmw0x"]
+[gd_scene load_steps=57 format=3 uid="uid://clmo7yp4pmw0x"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_iagfm"]
+[ext_resource type="FontFile" uid="uid://kupe4205a8kx" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_illjw"]
 [ext_resource type="AudioStream" uid="uid://b76oi132xjxp6" path="res://assets/sounds/jump.wav" id="3_ip2k0"]
 [ext_resource type="Texture2D" uid="uid://bb786uf5w0t4l" path="res://assets/sprites/Adventure_Character_Simple.png" id="3_p1dlq"]
 [ext_resource type="AudioStream" uid="uid://2qm1ntjwqa1e" path="res://assets/sounds/attack.wav" id="4_ib4va"]
 [ext_resource type="AudioStream" uid="uid://pus5sonahvxo" path="res://assets/sounds/double_jump.wav" id="4_je74o"]
 [ext_resource type="AudioStream" uid="uid://cbalyumyv2pck" path="res://assets/sounds/hurt.wav" id="5_hv40u"]
 [ext_resource type="AudioStream" uid="uid://dwvrgib45blio" path="res://assets/sounds/death.wav" id="6_qm7wp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0fdu8"]
+font = ExtResource("2_illjw")
+font_size = 8
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vuwax"]
 atlas = ExtResource("3_p1dlq")
@@ -369,8 +374,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fta53"]
-radius = 6.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40htd"]
+size = Vector2(11, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nf7je"]
 size = Vector2(48, 18)
@@ -380,30 +385,51 @@ z_index = 5
 collision_layer = 2
 script = ExtResource("1_iagfm")
 
+[node name="NameLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -44.0
+offset_right = 20.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_0fdu8")
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_4v0ou")
-animation = &"jump"
-frame_progress = 1.0
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
-shape = SubResource("CircleShape2D_fta53")
+position = Vector2(-0.5, -7.5)
+shape = SubResource("RectangleShape2D_40htd")
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_ip2k0")
+bus = &"SFX"
 
 [node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_ib4va")
+bus = &"SFX"
 
 [node name="DoubleJumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_je74o")
+bus = &"SFX"
 
 [node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_hv40u")
+bus = &"SFX"
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_qm7wp")
+bus = &"SFX"
 
 [node name="AttackArea" type="Area2D" parent="."]
 

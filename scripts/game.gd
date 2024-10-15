@@ -8,6 +8,7 @@ func _ready():
 	# Asegúrate de que el menú esté oculto al iniciar el juego
 	menu.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	print(global.player_name)
 
 # Detectar cuando se presiona la tecla Esc
 func _input(event):

@@ -13,8 +13,8 @@ var player_name: String = ""  # Variable para almacenar el nombre del jugador
 
 func _ready():
 	# Inicializamos el conteo total de monedas después de que la escena esté lista
-	#total_coins = get_tree().get_nodes_in_group("Coins").size()
-	total_coins = 10
+	total_coins = get_tree().get_nodes_in_group("Coins").size()
+	#total_coins = 10
 	_start_timer()
 
 func _process(delta: float) -> void:
@@ -49,7 +49,7 @@ func add_point() -> void:
 
 func end_game() -> void:
 	_stop_timer()  # Detener el temporizador al final del juego
-	if bgm and bgm is AudioStreamPlayer2D:
+	if bgm and bgm is AudioStreamPlayer:
 		bgm.stop()
 
 	print("¡Todas las monedas recogidas! ¡Ganaste!")
@@ -69,8 +69,9 @@ func _change_to_gameover_scene() -> void:
 # Funciones de Guardado de Puntajes
 func _save_score(name: String, time: int) -> void:
 	var scores = _load_scores()
-	scores.append({"name": name, "time": time})
+	scores.insert(0, {"name": name, "time": time})  # Insertar al principio de la lista
 	_save_scores(scores)
+
 
 func _load_scores() -> Array:
 	var file_path = "user://scoreboard_data.json"

@@ -1,0 +1,181 @@
+[gd_scene load_steps=10 format=3 uid="uid://r80xsdctrms7"]
+
+[ext_resource type="Script" path="res://scripts/options.gd" id="1_hw33w"]
+[ext_resource type="FontFile" uid="uid://blgr3hgtr01hw" path="res://assets/fonts/PixelOperator8.ttf" id="2_g44qt"]
+[ext_resource type="FontFile" uid="uid://kupe4205a8kx" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_f4cb0"]
+[ext_resource type="AudioStream" uid="uid://7n0r3luti6en" path="res://assets/sounds/hover_sound.wav" id="4_4x7uf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q5krc"]
+font = ExtResource("3_f4cb0")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_1vncg"]
+font = ExtResource("3_f4cb0")
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_35b28"]
+font = ExtResource("3_f4cb0")
+
+[sub_resource type="LabelSettings" id="LabelSettings_07w8b"]
+font = ExtResource("3_f4cb0")
+
+[sub_resource type="Theme" id="Theme_n3ibp"]
+default_font = ExtResource("2_g44qt")
+default_font_size = 30
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hw33w")
+
+[node name="ScoreboardLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -240.0
+offset_right = 200.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "OPTIONS"
+label_settings = SubResource("LabelSettings_q5krc")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -33.0
+offset_right = 200.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="SoundLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Sound Volume"
+label_settings = SubResource("LabelSettings_1vncg")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MasterVolumeLabel" type="Label" parent="VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "MASTER"
+label_settings = SubResource("LabelSettings_35b28")
+
+[node name="MasterMuteButton" type="Button" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_f4cb0")
+text = "MUTE"
+
+[node name="MasterSlider" type="HSlider" parent="VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="BGMVolumeLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "BGM"
+label_settings = SubResource("LabelSettings_35b28")
+
+[node name="BGMMuteButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_f4cb0")
+text = "MUTE"
+
+[node name="BGMSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="SFXVolumeLabel" type="Label" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "SFX"
+label_settings = SubResource("LabelSettings_07w8b")
+
+[node name="SFXMuteButton" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_f4cb0")
+text = "MUTE"
+
+[node name="SFXSlider" type="HSlider" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="BackButton" type="Button" parent="."]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = 214.5
+offset_right = 66.0
+offset_bottom = 253.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n3ibp")
+theme_override_colors/font_hover_color = Color(0.137122, 0.645266, 1.92523e-07, 1)
+theme_override_fonts/font = ExtResource("3_f4cb0")
+theme_override_font_sizes/font_size = 30
+text = "BACK"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4x7uf")
+volume_db = 10.0
+bus = &"SFX"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/MasterMuteButton" to="." method="_on_master_mute_button_pressed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer3/MasterSlider" to="." method="_on_master_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/BGMMuteButton" to="." method="_on_bgm_mute_button_pressed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/BGMSlider" to="." method="_on_bgm_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/SFXMuteButton" to="." method="_on_sfx_mute_button_pressed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer2/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

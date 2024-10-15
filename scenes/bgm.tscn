@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://dtsbqv0rdnyri" path="res://assets/music/8-bit-arcade-138828.mp3" id="1_ol2v6"]
 [ext_resource type="Script" path="res://scripts/bgm.gd" id="2_0ox33"]
 
-[node name="BGM" type="AudioStreamPlayer2D"]
+[node name="BGM" type="AudioStreamPlayer"]
 process_mode = 3
 stream = ExtResource("1_ol2v6")
 autoplay = true

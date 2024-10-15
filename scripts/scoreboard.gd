@@ -1,7 +1,8 @@
 extends CanvasLayer
 
 @onready var back_button: Button = $Control/Back
-@onready var score_list: VBoxContainer = $VBoxContainer2/ScoreList
+@onready var score_list: VBoxContainer = $VBoxContainer2/ScrollContainer/ScoreList
+#@onready var score_list: VBoxContainer = $VBoxContainer2/ScoreList
 @onready var hover_sound: AudioStreamPlayer = $Control/HoverSound
 
 func _ready():
@@ -47,6 +48,7 @@ func _load_scores():
 				# Crear una etiqueta para el nombre con ajuste de tamaño
 				var name_label = Label.new()
 				name_label.text = name
+				name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 				name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL  # Hacer que el nombre ocupe el espacio necesario
 				
 				# Formatear el tiempo como mm:ss
@@ -57,6 +59,7 @@ func _load_scores():
 				# Crear una etiqueta para el tiempo con ajuste de tamaño
 				var time_label = Label.new()
 				time_label.text = formatted_time  # Asignar el tiempo formateado
+				time_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 				time_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL  # Hacer que el tiempo ocupe el espacio necesario
 
 				# Alinear correctamente los elementos

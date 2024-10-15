@@ -122,7 +122,6 @@ z_index = 2
 script = ExtResource("1_jgtn5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_l6w73")
 
@@ -134,19 +133,16 @@ autoplay = "walk"
 frame_progress = 0.684709
 
 [node name="Killzone" parent="." instance=ExtResource("2_8hu1m")]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_ln4mk")
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
-visible = false
 position = Vector2(0, -11)
 target_position = Vector2(8, 0)
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
-visible = false
 position = Vector2(0, -11)
 target_position = Vector2(-8, 0)
 

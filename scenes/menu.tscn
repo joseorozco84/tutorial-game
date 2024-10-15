@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://crnnym42rcq45"]
+[gd_scene load_steps=10 format=3 uid="uid://crnnym42rcq45"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_sakvb"]
 [ext_resource type="FontFile" uid="uid://blgr3hgtr01hw" path="res://assets/fonts/PixelOperator8.ttf" id="2_sexwf"]
@@ -6,7 +6,11 @@
 [ext_resource type="AudioStream" uid="uid://7n0r3luti6en" path="res://assets/sounds/hover_sound.wav" id="4_6nae6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4y2d"]
-bg_color = Color(0.0295066, 0.0295066, 0.0295065, 0.498039)
+bg_color = Color(0.380392, 0.380392, 0.380392, 0.913725)
+
+[sub_resource type="Theme" id="Theme_boe3k"]
+default_font = ExtResource("3_j0pab")
+default_font_size = 20
 
 [sub_resource type="Theme" id="Theme_m6fey"]
 default_font = ExtResource("2_sexwf")
@@ -30,7 +34,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sakvb")
-metadata/_edit_lock_ = true
 
 [node name="Panel" type="Panel" parent="."]
 visible = false
@@ -58,6 +61,29 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="PlayerOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_boe3k")
+theme_override_fonts/font = ExtResource("3_j0pab")
+theme_override_font_sizes/font_size = 28
+alignment = 1
+
+[node name="PlusButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_j0pab")
+theme_override_font_sizes/font_size = 30
+text = "+"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
@@ -83,6 +109,18 @@ theme_override_colors/font_hover_color = Color(0.137122, 0.645266, 1.92523e-07, 
 theme_override_fonts/font = ExtResource("3_j0pab")
 text = "SCOREBOARD"
 
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme = SubResource("Theme_m6fey")
+theme_override_colors/font_hover_color = Color(0.137122, 0.645266, 1.92523e-07, 1)
+theme_override_fonts/font = ExtResource("3_j0pab")
+text = "OPTIONS"
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
 [node name="ExitButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
@@ -94,9 +132,13 @@ text = "EXIT"
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_6nae6")
 volume_db = 10.0
+bus = &"SFX"
 
 [connection signal="mouse_entered" from="." to="." method="_on_button_mouse_entered"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/PlayerOptionButton" to="." method="_on_player_option_button_selected"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/PlusButton" to="." method="_on_plus_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ScoreboardButton" to="." method="_on_scoreboard_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
